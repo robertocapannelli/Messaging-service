@@ -20,3 +20,6 @@ da utenti autorizzati (deve essere quindi previsto un meccanismo di autenticazio
 
 Per progetti misti Unix/Windows e' a scelta quale delle due applicazioni 
 sviluppare per uno dei due sistemi.
+
+
+
