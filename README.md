@@ -1,6 +1,4 @@
-# messaging service
-
-Messaging service 
+# Messaging service
 
 Realizzazione di un servizio di scambio messaggi supportato tramite un server
 sequenziale o concorrente (a scelta). Il servizio deve accettare messaggi 
