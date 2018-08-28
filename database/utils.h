@@ -20,6 +20,7 @@
 
 //Instance of the database
 sqlite3 *db;
+sqlite3_stmt *stmt;
 
 int open_connection(int result);
 

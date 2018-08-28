@@ -1,4 +1,5 @@
 #include "message.h"
+#include <string.h>
 
 /**
  * This a callback requested from the sqlite3 standard
@@ -30,7 +31,7 @@ int insert_message(char *from, char *to, char *message, int timestamp){
     //Allocate enough memory to store the sql statement
     sql = malloc(sizeof(char *) * 5000);
 
-    //Add the sql statement string to the allocated memory
+    //Add the sql query string to the allocated memory
     sprintf(sql,
             "INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', %d )",
             MESSAGE_TABLE,
@@ -43,7 +44,6 @@ int insert_message(char *from, char *to, char *message, int timestamp){
             message,
             timestamp);
 
-    printf("sql statement: %s", sql);
     //Execute a SQL statement
     result = sqlite3_exec(db, sql, callback, 0, &error);
     if (result != SQLITE_OK) {
@@ -77,7 +77,7 @@ int delete_message(int rowid){
     //Allocate enough memory to store the sql statement
     sql = malloc(sizeof(char *) * 1000);
 
-    //Add the sql statement string to the allocated memory
+    //Add the sql query to the allocated memory
     sprintf(sql, "DELETE FROM %s WHERE %s = '%d'", MESSAGE_TABLE, ROWID_COLUMN, rowid);
 
     //Execute a SQL statement
@@ -93,6 +93,52 @@ int delete_message(int rowid){
     sqlite3_close(db);
 
     //Free memory allocated for the sql statement
+    free(sql);
+
+    return 0;
+}
+
+/**
+ * Get all the messages received for a specific user
+ * @param email_user
+ * @return returns 0 if the query was successful
+ */
+int get_received_messages(char *email_user){
+    char *sql = NULL;
+    int result = 0;
+
+    //Open connection
+    open_connection(result);
+
+    //Allocate enough memory to store the sql statement
+    sql = malloc(sizeof(char *) * 1000);
+
+    //Add the SQL query to the allocated memory
+    sprintf(sql,"SELECT rowid, * FROM %s WHERE %s = '%s'", MESSAGE_TABLE, TO_COLUMN, email_user);
+
+    //Prepare statement to be executed
+    int prepare = sqlite3_prepare_v2(db, sql, (int) strlen(sql), &stmt, 0);
+    if(prepare != SQLITE_OK){
+        fprintf(stderr, "SQL error: %s", sqlite3_errmsg(db));
+        exit(EXIT_FAILURE);
+    }
+
+    //Loop over the rows
+    while(sqlite3_step(stmt) == SQLITE_ROW){
+        printf("\nMESSAGE #%d\nFrom: %s\n%s\n",
+                sqlite3_column_int(stmt, 0),
+                sqlite3_column_text(stmt, 1),
+                sqlite3_column_text(stmt, 3));
+        puts("--------------------");
+    }
+
+    //Delete the prepared statement
+    sqlite3_finalize(stmt);
+
+    //Close the db connection
+    sqlite3_close(db);
+
+    //Free the memory allocated
     free(sql);
 
     return 0;
