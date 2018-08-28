@@ -123,6 +123,7 @@ int get_received_messages(char *email_user){
         exit(EXIT_FAILURE);
     }
 
+    //TODO this is just to test the loop, we should print out to the application
     //Loop over the rows
     while(sqlite3_step(stmt) == SQLITE_ROW){
         printf("\nMESSAGE #%d\nFrom: %s\n%s\n",
