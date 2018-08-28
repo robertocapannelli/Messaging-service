@@ -13,5 +13,6 @@ int open_connection(int result){
         sqlite3_close(db);
         exit(EXIT_FAILURE);
     }
+    puts("Database opened successfully!");
     return 0;
 }

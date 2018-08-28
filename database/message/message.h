@@ -4,5 +4,6 @@
 #include "../utils.h"
 
 int insert_message(char *from, char *to, char *message, int timestamp);
+int delete_message(int rowid);
 
 #endif //MESSAGING_SERVICE_MESSAGE_H

@@ -38,6 +38,7 @@ int insert_user(char *email, char *password){
         sqlite3_free(error);
         exit(EXIT_FAILURE);
     }
+    puts("User added successfully!");
 
     //Close the connection
     sqlite3_close(db);
@@ -60,7 +61,7 @@ int delete_user(char *email){
     //Open connection
     open_connection(result);
 
-    //ALlocate enought memory to store the sql statement
+    //Allocate enough memory to store the sql statement
     sql = malloc(sizeof(char *) * 1000);
 
     //Add the sql statement string to the allocated memory
@@ -73,6 +74,7 @@ int delete_user(char *email){
         sqlite3_free(error);
         exit(EXIT_FAILURE);
     }
+    puts("The user has been deleted successfully!");
 
     //Close the connection
     sqlite3_close(db);

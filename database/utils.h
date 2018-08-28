@@ -16,6 +16,7 @@
 #define TO_COLUMN "to_user"
 #define MESSAGE_COLUMN "message"
 #define TIMESTAMP_COLUMN "timestamp"
+#define ROWID_COLUMN "rowid"
 
 //Instance of the database
 sqlite3 *db;
