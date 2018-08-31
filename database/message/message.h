@@ -1,6 +1,8 @@
 #ifndef MESSAGING_SERVICE_MESSAGE_H
 #define MESSAGING_SERVICE_MESSAGE_H
 
+#define DB_MESSAGE_DEBUG 0
+
 #include "../utils.h"
 
 int insert_message(char *from, char *to, char *message, int timestamp);

@@ -144,3 +144,24 @@ int get_received_messages(char *email_user){
 
     return 0;
 }
+
+#if DB_MESSAGE_DEBUG
+int main(int argc, char* argv[]) {
+    int get_msg = get_received_messages("roberto.capannelli@gmail.com");
+    if(get_msg != 0){
+        perror("Could not get messages");
+        exit(EXIT_FAILURE);
+    }
+    int del_msg = delete_message(2);
+    if(del_msg != 0){
+        perror("Could not delete the message");
+        exit(EXIT_FAILURE);
+    }
+    int message = insert_message("roberto@nwdesigns.it", "roberto.capannelli@gmail.com", "HEY HEY HEY", 126389289);
+    if(message != 0){
+        perror("Could not insert the message");
+        exit(EXIT_FAILURE);
+    }
+    return 0;
+}
+#endif
