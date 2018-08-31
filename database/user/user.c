@@ -84,3 +84,57 @@ int delete_user(char *email){
 
     return 0;
 }
+
+//TODO we should make just one call with email and password together and not just one and then the other so save memory
+int select_user(const char *email_user, const char *password_user) {
+    char *sql;
+    int result = 0;
+
+    //Open connection
+    open_connection(result);
+
+    //Add the SQL query to the allocated memory
+    sql = malloc(sizeof(const char *) * 30);
+
+    //Add the SQL query to the allocated memory
+    sprintf(sql,"SELECT email FROM %s WHERE %s = '%s' AND %s = '%s'", USER_TABLE, EMAIL_COLUMN, email_user, PASSWORD_COLUMN, password_user );
+
+    //Prepare statement to be executed
+    int prepare = sqlite3_prepare_v2(db, sql, (int) strlen(sql), &stmt, 0);
+    if(prepare != SQLITE_OK){
+        fprintf(stderr, "SQL error: %s", sqlite3_errmsg(db));
+        exit(EXIT_FAILURE);
+    }
+
+    //Loop over the rows
+    while(sqlite3_step(stmt) == SQLITE_ROW){
+        if(sqlite3_step(stmt) == SQLITE_DONE){
+            //char *email = (char *) sqlite3_column_text(stmt, 0);
+            puts("User found!");
+            exit(EXIT_SUCCESS);
+        }
+    }
+
+    return 1;
+}
+
+#if DB_USER_DEBUG
+int main(int argc, char* argv[]) {
+    int select = select_user("roberto@nwdesigns.it", NULL);
+    if(select != 0){
+        perror("err");
+        exit(EXIT_FAILURE);
+    }
+    int delete = delete_user("robee");
+    if(delete != 0){
+        perror("Could not delete the user");
+        exit(EXIT_FAILURE);
+    }
+    int insert = insert_user("roberto@nwdesigns.it","rob");
+    if(insert != 0){
+        perror("Could not insert");
+        exit(EXIT_FAILURE);
+    }
+    return 0;
+}
+#endif
