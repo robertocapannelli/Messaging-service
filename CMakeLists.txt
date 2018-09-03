@@ -34,8 +34,6 @@ add_executable(client
         client/client.c)
 
 add_executable(db
-        database/connection.c
-        database/connection.h
         ${DB_USER}
         ${DB_MESSAGE}
         ${UTILS})
