@@ -3,7 +3,7 @@
 
 #define DB_USER_DEBUG 0
 
-#include "../utils.h"
+#include "../db_utils.h"
 #include <string.h>
 
 int insert_user(char *email, char *password);

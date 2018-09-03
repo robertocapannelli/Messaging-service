@@ -3,7 +3,7 @@
 
 #define DB_MESSAGE_DEBUG 0
 
-#include "../utils.h"
+#include "../db_utils.h"
 
 int insert_message(char *from, char *to, char *message, int timestamp);
 int delete_message(int rowid);
