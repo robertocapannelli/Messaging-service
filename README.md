@@ -3,7 +3,7 @@
 Realizzazione di un servizio di scambio messaggi supportato tramite un server
 sequenziale o concorrente (a scelta). Il servizio deve accettare messaggi 
 provenienti da client (ospitati in generale su macchine distinte da quella 
-dove riese il server) ed archiviarli.  
+dove risiede il server) ed archiviarli.
 
 L'applicazione client deve fornire ad un utente le seguenti funzioni:
 1. Lettura tutti i messaggi spediti all'utente.
