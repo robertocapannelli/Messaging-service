@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "db_utils.h"
 
 /**
  * Open a connection to DATABASE defined in the header
