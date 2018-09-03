@@ -115,7 +115,7 @@ int select_user(const char *email_user, const char *password_user) {
         }
     }
 
-    return 1;
+    return 0;
 }
 
 #if DB_USER_DEBUG

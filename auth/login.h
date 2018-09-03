@@ -8,4 +8,6 @@
 
 #define AUTH_LOGIN_DEBUG 0
 
+int authentication();
+
 #endif //MESSAGING_SERVICE_LOGIN_H

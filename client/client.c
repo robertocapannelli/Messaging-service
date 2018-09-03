@@ -34,7 +34,11 @@ int main(int argc, char *argv[]){
     //Communicate with the server
 
     while(1){
-        printf("Enter the message:\n");
+        //printf("Enter the message:\n");
+
+        //TODO we have to ask authentication here
+
+        int auth = authentication();
 
         if(scanf("%s", message) == 0){
             perror("Scanf error");

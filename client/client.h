@@ -9,4 +9,6 @@
 #include <sys/un.h>
 #include <unistd.h>
 
+#include "../auth/login.h"
+
 #endif //MESSAGING_SERVICE_CLIENT_H
